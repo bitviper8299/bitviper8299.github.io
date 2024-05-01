@@ -1,18 +1,20 @@
+/OVERVIEW/
 first we need to get signal from fl
 make io drivers port 1
 midi device to 0
-
 routing
 route midi data to time clock
 /time clock being noteon / noteoff messages
-/the clock that webmidi runs on is the bones meat and flesh to this project. since we are dealing with midi data, it is a bit more compkicated n how we control the gate ( relating to the tempo of gate, how long the gate is active ((essentially wet/dry signals))
-
+/the clock that webmidi runs on is the bones meat and flesh to this project. since we are dealing with midi data, it is a bit more compkicated n how we control the gate. (relating to the tempo of gate, how long the gate is active ((essentially wet/dry signals))
 we work around this by controlling the paramters of
 /how long each note is on for as well as
 //how quick the note turns off
 we then use the tempo nob to control the ENITRE clock. this shows the rate of which the noteon/noteoff messages are played for
 
-/april 7 2024 read me
+/TESTING REPORT/
+we were having issues with the tempo slider not sticking to the clock. it would play some notes on a clock, then play the notes in a swing-type of rhythm stuck to the clock when t was simply supposed to do noteon-noteoff in an equal manner. so we converted the way we dd the math from bpm to miliiseconds i love the way the math selector brought so much more life into the project, making it real experimental and note just a simple gate.
+
+/APRIL 7, 2024 READ ME/
 the point im at with this is near half way.
 i have to figure out how to have a natural note off when the user is playing, because it
 plays the note to the alotted duration.
@@ -21,3 +23,34 @@ im then going to have to set up some sort of array to be able to make the tempo 
 varied.
 another problem im having is once the note is off, it doesnt play anything after- im guessing
 its because i havent set up my array function for it to work.
+
+/DEVELOPMENTAL PROGRESS REPORT 1/
+i got the note on and offs working, what i'm failing as it phase issues. webmidi does not seem to be recognizing the clock, and it playes repeated notes on the same interval, yet they overlapp and make rreally loud noises paired with phase issues. it also seems to be only note it played is c, and its very short. i fixed this by declaring a new variable called note-length, which gives the note a length to be played. this will come in late into play when i use the note-length to modulae how my gate works, lot easier said than done since we are dealing with midi data. so we have to find a way to keep everything relevant to the clock.
+
+/DEVELOPMENTAL PROGRESS REPORT 2/
+we have things now running on the clock, but we are still running into phase issues with the note on note off, so i started to look at the note length and saw that it wasn't technically on the clock? it would play a c for example and keep playing so i had to configure that again.
+myInput.addListener("noteoff", function (someMIDI) {
+// myOutput.channels[1].sendNoteOff(someMIDI.note);
+myNotes.splice(myNotes.indexOf(someMIDI.note.number), 1);
+console.log(myNotes);
+if (myNotes.length == 0) {
+clearInterval(noteRepeat);
+}
+});
+});
+i also realized that the clock was running no matter what, so i configured it in a way that the time clock starts based upon input. this allows for a wayyyyy smoother experience as well as eliminating ost of the phase/ overlap issues i was having.i also introduced this random math selector thing thanks to dr. wells. this add a whole new element to my project, essentially making it a random selector where it's probability of picking notes when played is determined by a slider (code is pasted below). the probability can be edited in the code for you to chose how the math works in selecting notes. i think i have it at a point where it gives enough, but i'd like to look into it and mess with it later.
+const midiLoop = function () {
+myNotes.forEach(function (someNote) {
+if (randoThing) {
+if (Math.random() > document.getElementById("prob").value) {
+myOutput.channels[].playNote(someNote, {
+duration: beatLength _ noteLength,
+});
+}
+} else {
+myOutput.channels[].playNote(someNote, {
+duration: beatLength _ noteLength,
+});
+}
+});
+};
