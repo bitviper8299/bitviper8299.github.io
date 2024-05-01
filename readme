@@ -1,10 +1,23 @@
-//read me
-//the point im at with this is near half way.
-//i have to figure out how to have a natural note off when the user is playing, because it
-    plays the note to the alotted duration.
-    essentially finding a way to differentiate a natural noteoff vs what the wedmidi is processing
-//im then going to have to set up some sort of array to be able to make the tempo of the function 
-    varied.
-//another problem im having is once the note is off, it doesnt play anything after- im guessing
-    its because i havent set up my array function for it to work.
-    
+first we need to get signal from fl
+make io drivers port 1
+midi device to 0
+
+routing
+route midi data to time clock
+/time clock being noteon / noteoff messages
+/the clock that webmidi runs on is the bones meat and flesh to this project. since we are dealing with midi data, it is a bit more compkicated n how we control the gate ( relating to the tempo of gate, how long the gate is active ((essentially wet/dry signals))
+
+we work around this by controlling the paramters of
+/how long each note is on for as well as
+//how quick the note turns off
+we then use the tempo nob to control the ENITRE clock. this shows the rate of which the noteon/noteoff messages are played for
+
+/april 7 2024 read me
+the point im at with this is near half way.
+i have to figure out how to have a natural note off when the user is playing, because it
+plays the note to the alotted duration.
+essentially finding a way to differentiate a natural noteoff vs what the wedmidi is processing
+im then going to have to set up some sort of array to be able to make the tempo of the function
+varied.
+another problem im having is once the note is off, it doesnt play anything after- im guessing
+its because i havent set up my array function for it to work.
