@@ -1,0 +1,92 @@
+<<!DOCTYPE html>
+<!-- The doctype declaration above tells the web browser about the document type and version of HTML. -->
+<html>
+  <head>
+    <!-- The head section contains meta information, scripts, and links to external resources. -->
+    <title>WebMIDI IO</title>
+    <!-- The title tag sets the title of the web page as it appears in the browser tab. -->
+
+    <!-- This script tag links to the WebMidi.js library, enabling MIDI functionality in the web browser. -->
+    <script src="https://cdn.jsdelivr.net/npm/webmidi@latest/dist/iife/webmidi.iife.js"></script>
+
+    <!-- This script tag links to the external JavaScript file that contains the logic for handling MIDI devices. -->
+    <script src="script.js" type="module"></script>
+
+    <!-- Add a <style> block to define CSS styles -->
+    <style>
+      body {
+        background-color: rgba(136, 247, 151, 0.385);
+        font-family: "Jersey 10", sans-serif;
+      }
+
+      p {
+        text-decoration: underline;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap"
+    />
+  </head>
+  <body>
+    <!-- The body section contains the content of the web page. -->
+    <h1>JOE K'S MIDI FX:</h1>
+    <!-- An h1 header that provides a title or a brief description of the page's purpose. -->
+    <h1>SUPERBULOUS GATING TOOL WITH RANDOM MATH SELECTOR</h1>
+    <div>
+      <!-- A division or a section in an HTML document, used here to group the input device selector. -->
+      <label for="dropdown-ins">Select a MIDI Input:</label>
+      <!-- The label tag defines a label for the select element below. The 'for' attribute specifies which form element the label is bound to. -->
+      <select id="dropdown-ins">
+        <!-- The select tag represents a drop-down list. The id attribute is used to identify the element in CSS and JavaScript. -->
+        <!-- Options for the drop-down list are dynamically added through the script.js file. -->
+      </select>
+    </div>
+
+    <div>
+      <!-- Another division for grouping the output device selector. -->
+
+      <label for="dropdown-outs">Select a MIDI Output:</label>
+      <!-- Similar to the input label, this defines a label for the MIDI output selector. -->
+      <select id="dropdown-outs">
+        <!-- This select element is for choosing a MIDI output device. -->
+        <!-- Like the input selector, options are added dynamically via script.js. -->
+      </select>
+    </div>
+    <div>
+      <p>
+        tempo slider dictates how fast the gate is (how fast the clock runs)
+      </p>
+      <label for="tempo">tempo:</label>
+      <input type="range" min="1" max="1000" id="tempo" />
+    </div>
+    <div>
+      <p>
+        note length slide dictates how active the gate is. slide up for max
+        length
+      </p>
+      <label for="note-length">note-length:</label>
+      <input type="range" min="1" max="100" id="note-length" />
+    </div>
+    <div>
+      <p>check the box to activate the math coolness selector</p>
+      <label for="math coolness">math coolness:</label>
+      <input type="checkbox" id="math coolness" />
+    </div>
+    <div>
+      <p>
+        minimum means the less probability the notes will play, while max level
+        grants you with more of the notes being played
+      </p>
+      <label for="prob">probability slider:</label>
+      <input
+        type="range"
+        min="0.0"
+        max="1.0"
+        id="prob"
+        step="0.01"
+        value="0.5"
+      />
+    </div>
+  </body>
+</html>

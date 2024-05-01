@@ -1,0 +1,10 @@
+//read me
+//the point im at with this is near half way.
+//i have to figure out how to have a natural note off when the user is playing, because it
+    plays the note to the alotted duration.
+    essentially finding a way to differentiate a natural noteoff vs what the wedmidi is processing
+//im then going to have to set up some sort of array to be able to make the tempo of the function 
+    varied.
+//another problem im having is once the note is off, it doesnt play anything after- im guessing
+    its because i havent set up my array function for it to work.
+    
